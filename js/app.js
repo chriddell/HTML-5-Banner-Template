@@ -81,6 +81,36 @@ function reset_class( id ) {
     //onchange({type: document[hidden] ? "blur" : "focus"});
 })();
 
+/**
+ * Populate data-animation-class property
+ * with animation class
+ */
+(function() {
+  // Get all the nodes
+  var allElements = document.getElementsByTagName("*");
+
+  // Run loop on all the nodes
+  for ( var i = 0, n = allElements.length; i < n; i++ ) {
+
+    // vars
+    var el = allElements[i], // current element
+        currentClasses = el.className, // classes as a string
+        result = /.*__ani/.test(currentClasses); // test if animation class in classes
+
+    // If element has animation classs   
+    if ( result == true ) {
+
+      // Get the last class of classList 
+      // (because it will always be the animation class)
+      var j = el.classList.length,
+          k = el.classList[j - 1];
+
+      // Set data-animation-class attr as animation class from classList
+      el.setAttribute('data-animation-class', k);
+    }
+  }
+})();
+
 /* Get all IDs on page. Helper to populate 'element_array' variable */
 /*
 (function() {
