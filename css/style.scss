@@ -3,42 +3,51 @@
 Main styles for this project.
 ---------------------------------------- */
 
+
 /* Settings
 ---------------------------------------- */
+
 $banner-width: 0;
 $banner-height: 0;
 
 /* Mixins
 ---------------------------------------- */
+
 @mixin abs($top, $left) {
-  top: $top;
-  left: $left;
+	top: $top;
+	left: $left;
 }
-
 @mixin keyframes($animation-name) {
-  @-webkit-keyframes #{$animation-name} {
-    @content;
-  }
-  @-moz-keyframes #{$animation-name} {
-    @content;
-  }  
-  @-ms-keyframes #{$animation-name} {
-    @content;
-  }
-  @-o-keyframes #{$animation-name} {
-    @content;
-  }  
-  @keyframes #{$animation-name} {
-    @content;
-  }
+	@-webkit-keyframes #{$animation-name} {
+		@content;
+	}
+	@-moz-keyframes #{$animation-name} {
+		@content;
+	}
+	@-ms-keyframes #{$animation-name} {
+		@content;
+	}
+	@-o-keyframes #{$animation-name} {
+		@content;
+	}
+	@keyframes #{$animation-name} {
+		@content;
+	}
 }
-
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
-  animation: #{$str};      
+@mixin animation($str...) {
+	-webkit-animation: #{$str};
+	-moz-animation: #{$str};
+	-ms-animation: #{$str};
+	-o-animation: #{$str};
+	animation: #{$str};
+}
+@mixin perspective($str) {
+	-webkit-perspective: #{$str};
+	perspective: #{$str};
+}
+@mixin transformOrigin($str) {
+	-webkit-transform-origin: #{$str};
+	transform-origin: #{$str};
 }
 
 /* Animations
@@ -47,70 +56,71 @@ $banner-height: 0;
 
 /* Base
 ---------------------------------------- */
+
 body {
-  width: $banner-width;
-  height: $banner-height;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+	width: $banner-width;
+	height: $banner-height;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
-
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
-
-img,
+img, .clicktag {
+	position: absolute;
+}
 .clicktag {
-  position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
-
-.clicktag {
-  top: 0; right: 0; bottom: 0; left: 0;
-}
-
 .banner__wrapper {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
-  position: relative;
-  background-color: #0052cf;
-  overflow: hidden;
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+	position: relative;
+	background-color: #0052cf;
+	overflow: hidden;
 }
-
 .clicktag {
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-
-  &:hover {
-    cursor: pointer;
-  }
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 /* Global Components
 ---------------------------------------- */
+
 .f {
-  position: absolute;
-  height: $banner-height;
-  width: $banner-width;
-  overflow: hidden;
+	position: absolute;
+	height: $banner-height;
+	width: $banner-width;
+	overflow: hidden;
 }
 
-  /* Frame one
+/* Frame one
   ---------------------------------------- */
 
-  /* Frame two
+
+/* Frame two
   ---------------------------------------- */
 
-  /* Frame three
+
+/* Frame three
   ---------------------------------------- */
 
 
 /* Utils
 ---------------------------------------- */
+
 @for $i from 1 through 5 {
-  .zi--#{$i} {
-    z-index: $i;
-  }
+	.zi--#{$i} {
+		z-index: $i;
+	}
 }
