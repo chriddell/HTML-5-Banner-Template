@@ -1,24 +1,25 @@
 {
-	"name": "chriddell",
-	"version": "1.1.0",
-	"description": "HTML5 Banners",
-	"author": "Chris Liddell <nowthen@chrisliddell.co.uk>",
-	"contributors": [
-		{
-			"name": "Chris Liddell",
-			"email": "chrisliddell@otmcreate.com"
-		},
-		{
-			"name" : "David Heams",
-			"email" : "d.heams@whitelabelproductions.co.uk"
-		}
-	],
-	"devDependencies": {
-		"grunt": ">=0.4.5",
-		"grunt-autoprefixer": "^3.0.3",
-		"grunt-contrib-copy": "^1.0.0",
-		"grunt-contrib-uglify": "^2.0.0",
-		"grunt-contrib-watch": ">=0.6.1",
-		"grunt-sass": "^1.1.0"
-	}
+  "name": "chriddell",
+  "version": "1.1.0",
+  "description": "HTML5 Banners",
+  "contributors": [
+    {
+      "name": "Chris Liddell",
+      "email": "chrisliddell@otmcreate.com"
+    },
+    {
+      "name": "David Heams",
+      "email": "d.heams@whitelabelproductions.co.uk"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-imageoptim": "^1.4.4",
+    "grunt-sass": "^2.0.0"
+  }
 }

@@ -13,8 +13,8 @@ module.exports = function (grunt) {
 				}
 			},
 			js: {
-				files: ['./js/app.js'],
-				tasks: ['uglify:dev'],
+				files: [ './js/app.js' ],
+				tasks: [ 'uglify:dev' ],
 				options: {
 					livereload: true
 				}
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 					sourceMap: false
 				},
 				files: {
-					'./css/style.min.css': './css/style.scss'
+					'./dist/css/style.min.css': './css/style.scss'
 				}
 			}
 		},
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
 			main: {
 				options: {
 					map: true,
-					browsers: ['ie >= 8', '> 2%']
+					browsers: ['ie >= 8', '> 0.5%']
 				},
 				src: './css/style.min.css',
 				dest: './css/style.min.css'
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 		uglify: {
 			dev: {
 				files: {
-					'js/min/app.min.js': ['js/app.js']
+					'js/app.min.js': [ 'js/app.js' ]
 				},
 				options: {
 					sourceMap: true
@@ -64,7 +64,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				files: {
-					'js/min/app.min.js': ['js/app.js']
+					'./dist/js/app.min.js': ['js/app.js']
 				},
 				options: {
 					sourceMap: false
@@ -78,10 +78,44 @@ module.exports = function (grunt) {
 					{
 						expand: true,
 						cwd: './',
-						src: ['js/min/app.min.js', 'index.html', 'css/style.min.css', 'assets/*'],
+						src: [
+							'index.html', 
+							'media/*'
+						],
 						dest: 'dist/'
           }
         ]
+			}
+		},
+
+		imageoptim: {
+			options: {
+				imageAlpha: false,
+				jpegMini: false
+			},
+			allJpgs: {
+				src: ['media/*.jpg']
+			},
+			allPngs: {
+				options: {
+					imageAlpha: true
+				},
+				src: ['media/*.png']
+			}
+		},
+
+		browserSync: {
+			bsFiles: {
+				src: [
+					'./css/style.min.css',
+					'./js/*.js',
+					'./js/*/*.js',
+					'./*.html'
+				]
+			},
+			options: {
+				watchTask: true,
+				proxy: 'http://xx.dev'
 			}
 		}
 
@@ -92,11 +126,13 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-browser-sync');
+	grunt.loadNpmTasks('grunt-imageoptim');
 
 	grunt.registerTask('default', [
-    'watch'
+    'browserSync', 'watch'
 	]);
 	grunt.registerTask('dist', [
-    'sass:dist', 'uglify:dist', 'autoprefixer:main', 'copy:dist'
+    'sass:dist', 'uglify:dist', 'autoprefixer:main', 'imageoptim:allJpgs', 'imageoptim:allPngs', 'copy:dist'
 	]);
 };
