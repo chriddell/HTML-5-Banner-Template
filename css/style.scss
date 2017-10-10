@@ -3,7 +3,6 @@
 Main styles for this project.
 ---------------------------------------- */
 
-
 /* Settings
 ---------------------------------------- */
 
@@ -17,31 +16,27 @@ $banner-height: 0;
 	top: $top;
 	left: $left;
 }
+
 @mixin keyframes($animation-name) {
 	@-webkit-keyframes #{$animation-name} {
 		@content;
 	}
-	@-moz-keyframes #{$animation-name} {
-		@content;
-	}
-	@-ms-keyframes #{$animation-name} {
-		@content;
-	}
-	@-o-keyframes #{$animation-name} {
-		@content;
-	}
+
 	@keyframes #{$animation-name} {
 		@content;
 	}
 }
+
 @mixin animation($str...) {
 	-webkit-animation: #{$str};
 	animation: #{$str};
 }
+
 @mixin perspective($str) {
 	-webkit-perspective: #{$str};
 	perspective: #{$str};
 }
+
 @mixin transformOrigin($str) {
 	-webkit-transform-origin: #{$str};
 	transform-origin: #{$str};
@@ -50,6 +45,36 @@ $banner-height: 0;
 /* Animations
 ---------------------------------------- */
 
+// Declarations
+
+@include keyframes(fadeIn) {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@include keyframes(fadeOut) {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+// Usage
+
+.a-fadeout {
+	@include animation(
+		fadeIn 0.5s, fadeOut 0.5s 2s
+	);
+}
+
 
 /* Base
 ---------------------------------------- */
@@ -57,67 +82,62 @@ $banner-height: 0;
 body {
 	width: $banner-width;
 	height: $banner-height;
-	position: relative;
+
 	margin: 0;
 	padding: 0;
+
+	position: relative;
+
 	overflow: hidden;
 }
+
 * {
 	box-sizing: border-box;
+	animation-fill-mode: forwards !important;
 }
-img, .clicktag {
-	position: absolute;
+
+/* Components
+---------------------------------------- */
+
+.l-banner-wrap {
+	height: 100%;
+	width: 100%;
+
+	display: inline-block;
+
+	position: relative;
+
+	background-color: #FFFFFF;
+
+	overflow: hidden;
 }
-.clicktag {
+
+.c-clicktag {
+	width: 100%;
+	height: 100%;
+
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+
+	z-index: 999999;
+
+	cursor: pointer;
 }
-.banner__wrapper {
-	height: 100%;
-	width: 100%;
-	display: inline-block;
-	position: relative;
-	background-color: #0052cf;
-	overflow: hidden;
-}
-.clicktag {
-	width: 100%;
-	height: 100%;
-	z-index: 10;
-	&:hover {
-		cursor: pointer;
-	}
-}
-
-/* Global Components
----------------------------------------- */
-
-.f {
-	position: absolute;
-	height: $banner-height;
-	width: $banner-width;
-	overflow: hidden;
-}
-
-/* Frame one
-  ---------------------------------------- */
-
-
-/* Frame two
-  ---------------------------------------- */
-
-
-/* Frame three
-  ---------------------------------------- */
 
 
 /* Utils
 ---------------------------------------- */
 
-@for $i from 1 through 5 {
-	.zi--#{$i} {
-		z-index: $i;
-	}
+.u-abs {
+	position: absolute;
+}
+
+.u-b {
+	display: block;
+}
+
+.u-hide {
+	opacity: 0;
 }
