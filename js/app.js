@@ -1,57 +1,66 @@
 var element;
-var loop_counter = 0; // Start loop counter
+var loopCounter = 0;
 var timerInt;
-var max_loops = 3; // No. of animation loops
-var element_array = [/* List IDs of elements to animate here */];
+var maxLoops = 3; // No. of animation loops
+var element_array = [ /* element IDs to loop animate */ ];
 
-    
 function politeInit() {
-  document.getElementById('banner').style.opacity = 1;
-  document.getElementById('banner').style.display = 'block';
-  start_timer();
+
+  // Show elem
+  var el = document.getElementById( 'banner' );
+  el.style.opacity = 1;
+  el.style.display = 'block';
+
+  // Start the timer
+  startTimer();
 }
 
-function clicktag_click(){
-  window.open('', '_blank');
+function clicktagInit(){
+  // Add vendor specific code
 }
 
-function start_timer() {
-  loop_counter++;
-  if(loop_counter < max_loops){
-    timerInt = setTimeout(reset_classes, 10000);
+function startTimer() {
+
+  loopCounter++;
+
+  if ( loopCounter < maxLoops ){
+
+    timerInt = setTimeout( resetClasses, 10000 );
   }
 }
 
-function reset_classes(){
-  for (var i = 0; i < element_array.length; i++) {
-    reset_class(element_array[i]);
-  } 
+function resetClasses(){
+
+  for ( var i = 0; i < element_array.length; i++ ) {
+
+    resetClass( element_array[i] );
+  }
 }
 
-function reset_class( id ) {
+function resetClass( id ) {
+
   element = document.getElementById( id );
-  var aniClass = element.getAttribute('data-animation-class');
+  var aniClass = element.getAttribute( 'data-animation-class' );
   element.classList.remove( aniClass );
   element.offsetWidth = element.offsetWidth;
   element.classList.add( aniClass );
         
-  start_timer();
+  startTimer();
 }
-
 
 // Stop banner when user switches tabs
 (function() {
   var hidden = "hidden";
 
   // Standards:
-  if (hidden in document)
-    document.addEventListener("visibilitychange", onchange);
-  else if ((hidden = "mozHidden") in document)
-    document.addEventListener("mozvisibilitychange", onchange);
-  else if ((hidden = "webkitHidden") in document)
-    document.addEventListener("webkitvisibilitychange", onchange);
-  else if ((hidden = "msHidden") in document)
-    document.addEventListener("msvisibilitychange", onchange);
+  if ( hidden in document )
+    document.addEventListener( 'visibilitychange', onchange );
+  else if ( ( hidden = 'mozHidden' ) in document )
+    document.addEventListener( 'mozvisibilitychange', onchange );
+  else if ( ( hidden = 'webkitHidden' ) in document )
+    document.addEventListener( 'webkitvisibilitychange', onchange );
+  else if ( ( hidden = 'msHidden' ) in document )
+    document.addEventListener( 'msvisibilitychange', onchange );
   // IE 9 and lower:
   else if ("onfocusin" in document)
     document.onfocusin = document.onfocusout = onchange;
@@ -69,11 +78,10 @@ function reset_class( id ) {
 
     evt = evt || window.event;
     //console.log('onchange = '+this[hidden] ? "hidden" : "visible");
-    clearTimeout(timerInt);
-    reset_classes();
-    // loop_counter = 0;
-    // timerInt = setTimeout(reset_classes, 10000);
-  
+    clearTimeout( timerInt );
+    resetClasses();
+    // loopCounter = 0;
+    // timerInt = setTimeout(resetClasses, 10000);
   }
 
   // set the initial state (but only if browser supports the Page Visibility API)
@@ -83,19 +91,20 @@ function reset_class( id ) {
 
 /**
  * Populate data-animation-class property
- * with animation class
+ * with animation class on load
  */
 (function() {
+
   // Get all the nodes
-  var allElements = document.getElementsByTagName("*");
+  var allElements = document.getElementsByTagName( '*' );
 
   // Run loop on all the nodes
-  for ( var i = 0, n = allElements.length; i < n; i++ ) {
+  for ( var i = 0; i < allElements.length; i++ ) {
 
     // vars
     var el = allElements[i], // current element
         currentClasses = el.className, // classes as a string
-        result = /.*__ani/.test(currentClasses); // test if animation class in classes
+        result = /.a-*/.test( currentClasses ); // test if animation class in classes
 
     // If element has animation classs   
     if ( result == true ) {
@@ -106,20 +115,7 @@ function reset_class( id ) {
           k = el.classList[j - 1];
 
       // Set data-animation-class attr as animation class from classList
-      el.setAttribute('data-animation-class', k);
+      el.setAttribute( 'data-animation-class', k );
     }
   }
 })();
-
-/* Get all IDs on page. Helper to populate 'element_array' variable */
-/*
-(function() {
-  var allElements = document.getElementsByTagName("*");
-  var allIds = [];
-  for (var i = 0, n = allElements.length; i < n; ++i) {
-    var el = allElements[i];
-    if (el.id) { allIds.push(el.id); }
-  }
-  console.log(allIds);
-})();
-*/
